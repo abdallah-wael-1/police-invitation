@@ -7,21 +7,10 @@ import { Heart, Sparkles, Calendar, MapPin, Clock, PartyPopper, Gem, ExternalLin
 ════════════════════════════════════════════ */
 const FontStyle = () => (
   <style>{`
-    @import url('https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Dancing+Script&display=swap');
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body { overflow-x: hidden; }
-
-    .font-script  { font-family: 'Pinyon Script', cursive !important; }
-    .font-display { font-family: 'Cormorant Garamond', Georgia, serif; }
-    .font-body    { font-family: 'Trebuchet MS', sans-serif; }
-
-    .text-gradient-romantic {
-      background: linear-gradient(135deg, hsl(350,65%,50%), hsl(15,65%,65%), hsl(45,80%,55%));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
 
     @keyframes floatBtn {
       0%,100% { transform: translateY(0) rotate(0deg); }
@@ -232,7 +221,7 @@ const Twinkles = memo(() => {
 });
 
 
-const SONG_URL = "/i-found-love.mpeg"; 
+const SONG_URL = "/next-to-you.mpeg"; 
 
 const MusicPlayer = memo(() => {
   const [playing,  setPlaying]  = useState(false);
@@ -283,7 +272,7 @@ const MusicPlayer = memo(() => {
 
   const toggle = useCallback(() => {
     const a = audioRef.current; if (!a) return;
-    if (playing) { a.pause(); setPlaying(false); }
+    if (playing) { a.pause(); setPlaying(false); }  
     else         { a.play().catch(()=>{}); setPlaying(true); startedRef.current = true; setPrompted(false); }
     addRipple();
   }, [playing]);
@@ -299,7 +288,7 @@ const MusicPlayer = memo(() => {
 
       {/* tap-to-play nudge */}
       <AnimatePresence>
-        {prompted && (
+        {prompted && (  
           <motion.div
             initial={{ opacity:0, x:20, scale:.85 }} animate={{ opacity:1, x:0, scale:1 }}
             exit={{ opacity:0, x:20, scale:.85 }}
@@ -349,7 +338,7 @@ const MusicPlayer = memo(() => {
                      fontSize:".7rem", color:C.muted, fontFamily:"Trebuchet MS,sans-serif",
                      display:"flex", alignItems:"center", gap:5 }}>
             <motion.span animate={{ opacity:[1,.3,1] }} transition={{ duration:1.2, repeat:Infinity }}>♪</motion.span>
-            Perfect — Ed Sheeran
+            Die With A Smile 
           </motion.div>
         )}
       </AnimatePresence>
@@ -423,7 +412,7 @@ const IntroAnimation = memo(({ onComplete }) => {
         <motion.div initial={{ opacity:0, y:20 }} animate={showNames?{opacity:1,y:0}:{}}
           transition={{ duration:.8 }} style={{ marginTop:24, textAlign:"center" }}>
           <h1 className="font-script text-gradient-romantic" style={{ fontSize:"clamp(2.5rem,6vw,3.75rem)" }}>
-            Ahmed &amp; Nouran
+            Eslam &amp; Rowaida
           </h1>
           <motion.p initial={{ opacity:0 }} animate={showNames?{opacity:1}:{}} transition={{ duration:.5, delay:.3 }}
             className="font-body"
@@ -474,7 +463,7 @@ const HeroSection = memo(() => (
         transition={{ duration:1.2, delay:.8, type:"spring", stiffness:100 }}
         className="font-script text-gradient-romantic"
         style={{ fontSize:"clamp(4rem,12vw,10rem)", lineHeight:1.15, marginBottom:8, paddingTop:16 }}>
-        Ahmed
+        Eslam
       </motion.h1>
 
       <motion.div initial={{ opacity:0, scale:0 }} animate={{ opacity:1, scale:1 }}
@@ -491,7 +480,7 @@ const HeroSection = memo(() => (
         transition={{ duration:1.2, delay:1.4, type:"spring", stiffness:100 }}
         className="font-script text-gradient-romantic"
         style={{ fontSize:"clamp(4rem,12vw,10rem)", lineHeight:1.15, marginBottom:32 }}>
-        Nouran
+        Rowaida
       </motion.h1>
 
       <motion.p initial={{ opacity:0, y:20 }} animate={{ opacity:1, y:0 }} transition={{ duration:.8, delay:1.8 }}
@@ -508,9 +497,9 @@ const HeroSection = memo(() => (
 ════════════════════════════════════════════ */
 const DetailsSection = memo(() => {
   const details = [
-    { icon:Calendar, label:"Date",     value:"March 24, 2026", sub:"Tuesday",               link:null },
-    { icon:Clock,    label:"Time",     value:"7:00 PM",         sub:"Doors open at 7:00 PM", link:null },
-    { icon:MapPin,   label:"Location", value:"Rivera",          sub:"Badrashin, Giza",       link:"https://maps.app.goo.gl/acyXCUUHUgdjaxT98" },
+    { icon:Calendar, label:"Date",     value:"April 19, 2026", sub:"Sunday",               link:null },
+    { icon:Clock,    label:"Time",     value:"5:00 PM - 9:00 PM",         sub:"Doors open at 5:00 PM", link:null },
+    { icon:MapPin,   label:"Location", value:"Soul Hall",          sub:"City Mark Resort",       link:"https://www.google.com/maps/place/City+Mark+Resort/@30.0060896,31.1192404,17z/data=!3m1!4b1!4m6!3m5!1s0x145845003f8a29a3:0x589a97b5bd27e17c!8m2!3d30.0060896!4d31.1192404!16s%2Fg%2F11vyspr8pp!18m1!1e1?entry=ttu" },
   ];
   return (
     <section style={{ position:"relative", padding:"80px 0", background:C.cream }}>
@@ -563,7 +552,7 @@ const DetailsSection = memo(() => {
 const CountdownSection = memo(() => {
   const [t, setT] = useState({ days:0, hours:0, minutes:0, seconds:0 });
   useEffect(() => {
-    const target = new Date("2026-03-24T19:00:00+02:00").getTime();
+    const target = new Date("2026-04-19T17:00:00+02:00").getTime();
     const tick = () => {
       const d = Math.max(0, target - Date.now());
       setT({ days:Math.floor(d/86400000), hours:Math.floor(d%86400000/3600000),
@@ -626,12 +615,11 @@ const QuoteSection = memo(() => (
         </motion.div>
         <p className="font-body" style={{ fontSize:"clamp(1.125rem,2.5vw,1.5rem)", color:C.fg80,
            fontStyle:"italic", lineHeight:1.8, marginBottom:24 }}>
-          "Every love story is beautiful, but ours is my favorite. Together we begin a new chapter
-           filled with love, laughter, and happily ever after."
+          "The world may be uncertain, but this moment… this love… is forever ✨"
         </p>
         <div style={{ display:"flex", alignItems:"center", justifyContent:"center", gap:16 }}>
           <div style={{ height:1, width:80, background:C.grad }} />
-          <span className="font-script" style={{ fontSize:"1.875rem", color:C.primary }}>A &amp; N</span>
+          <span className="font-script" style={{ fontSize:"1.875rem", color:C.primary }}>E &amp; R</span>
           <div style={{ height:1, width:80, background:C.grad }} />
         </div>
       </motion.div>
